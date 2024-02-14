@@ -27,6 +27,7 @@ public class AppProperties {
   private Boolean ips_enabled = false;
   private Boolean openapi_enabled = false;
   private Boolean mdm_enabled = false;
+  private String mdm_rules_json_location = "mdm-rules.json";
   private boolean advanced_lucene_indexing = false;
   private boolean enable_index_of_type = false;
   private Boolean allow_cascading_deletes = false;
@@ -76,7 +77,6 @@ public class AppProperties {
   private Cors cors = null;
   private Partitioning partitioning = null;
   private Boolean install_transitive_ig_dependencies = true;
-  private Boolean reload_existing_implementationguides = false;
   private Map<String, PackageInstallationSpec> implementationGuides = null;
 
   private String custom_content_path = null;
@@ -92,6 +92,7 @@ public class AppProperties {
   private Integer bundle_batch_pool_size = 20;
   private Integer bundle_batch_pool_max_size = 100;
   private final Set<String> local_base_urls = new HashSet<>();
+  private final Set<String> logical_urls = new HashSet<>();
   
   private final List<String> custom_interceptor_classes = new ArrayList<>();
 
@@ -176,7 +177,15 @@ public class AppProperties {
     this.mdm_enabled = mdm_enabled;
   }
 
-  public Cors getCors() {
+  public String getMdm_rules_json_location() {
+	return mdm_rules_json_location;
+}
+
+public void setMdm_rules_json_location(String mdm_rules_json_location) {
+	this.mdm_rules_json_location = mdm_rules_json_location;
+}
+
+public Cors getCors() {
     return cors;
   }
 
@@ -551,14 +560,6 @@ public class AppProperties {
 		this.install_transitive_ig_dependencies = install_transitive_ig_dependencies;
 	}
 	
-	public boolean getReload_existing_implementationguides() {
-		return reload_existing_implementationguides;
-	}
-	
-	public void setReload_existing_implementationguides(boolean reload_existing_implementationguides) {
-		this.reload_existing_implementationguides = reload_existing_implementationguides;
-	}
-
 	public Integer getBundle_batch_pool_size() {
 		return this.bundle_batch_pool_size;
 	}
@@ -577,6 +578,10 @@ public class AppProperties {
 
 	public Set<String> getLocal_base_urls() {
 		return local_base_urls;
+	}
+
+  public Set<String> getLogical_urls() {
+		return logical_urls;
 	}
 
 	public Boolean getIg_runtime_upload_enabled() {
